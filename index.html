@@ -49,15 +49,89 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h1>App pronóstico del tiempo - Vue.js 2.x.x</h1>
+					<h3>Pronóstico para hoy</h3>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<form id="form-pronostico" action="#">
+						<input class="form-control" type="text" name="ciudad" placeholder="Ingrese una ciudad">
+						<button class="btn btn-success">Consultar</button>						
+					</form>
+				</div>
 
-					<div class="">
-						<h1>App pronóstico del tiempo - Vue.js 2.x.x</h1>
-						<img src="./assets/images/icons/01d.svg">	
+				<div class="offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"></div>
+
+				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+					<div class="row">
+
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="pronostico-hoy">
+								<p>Buenos Aires</p>
+								<img class="img-pronostico" src="./assets/images/icons/01d.svg">
+								<p>20°</p>
+								<p>Parcialmente nublado</p>	
+							</div>		
+						</div>
+
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<div class="pronostico-info">
+								<p>1 enero del 2020</p>
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<div class="info-clima">
+											<p>Min/Max:</p>
+											<p>20°/27°</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<div class="info-clima">
+											<p>Alba/Ocaso:</p>
+											<p>07:30/18:20</p>
+										</div>
+									</div>
+								</div>
+								<p><strong>Viento: </strong>N</p>
+								<p><strong>Humedad: </strong>50%</p>
+								<p><strong>Visibilidad: </strong>10000</p>
+							</div>			
+						</div>
+
 					</div>
+				</div>
+			</div>
 
+			<hr class="hr">
+
+		</div>
+
+		
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h3>Pronóstico ciudades del mundo</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="pronostico-ciudad">
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<p>Ciudad</p>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<p>Actual</p>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<p>Min/Max</p>
+					</div>
+					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+						<p>Humedad</p>
+					</div>
 				</div>
 			</div>
 		</div>
+
 	</main>
 
 </body>
