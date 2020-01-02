@@ -1,25 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Trabajo Final - Kevin</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-
-	<style type="text/css">
-
-		.col-logos {
-			width: 40%;
-			padding-left: 15px;
-   			padding-right: 15px;
-		}
-		.col-header {
-			width: 60%;
-			padding-left: 15px;
-    		padding-right: 15px;
-		}
-
-	</style>
 
 </head>
 <body>
@@ -81,7 +66,7 @@
 								<div class="row">
 									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 										<div class="info-clima">
-											<p>Min/Max:</p>
+											<p>Min°/Max°:</p>
 											<p>20°/27°</p>
 										</div>
 									</div>
@@ -115,24 +100,135 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="pronostico-ciudad">
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<p>Ciudad</p>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+					<table class="table table-hover">
+					  <thead>
+					    <tr class="col-name">
+					      <th scope="col">Ciudad</th>
+					      <th scope="col">Actual</th>
+					      <th scope="col">Max°/Min°</th>
+					      <th scope="col">Humedad</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Roma</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>30°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      </td>
+					      <td>15°/25°</td>
+					      <td>50%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Paris</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>20°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
+					      </td>
+					      <td>17°/26°</td>
+					      <td>35%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Madrid</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>15°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
+					      </td>
+					      <td>14°/20°</td>
+					      <td>40%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Roma</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>30°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      </td>
+					      <td>15°/25°</td>
+					      <td>50%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Paris</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>20°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
+					      </td>
+					      <td>17°/26°</td>
+					      <td>35%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Madrid</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>15°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
+					      </td>
+					      <td>14°/20°</td>
+					      <td>40%</td>
+					    </tr>					    
+					    <tr>
+					      <th scope="row">Roma</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>30°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      </td>
+					      <td>15°/25°</td>
+					      <td>50%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Paris</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>20°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
+					      </td>
+					      <td>17°/26°</td>
+					      <td>35%</td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Madrid</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>15°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
+					      </td>
+					      <td>14°/20°</td>
+					      <td>40%</td>
+					    </tr>					    
+					    <tr>
+					      <th scope="row">Roma</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>30°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      </td>
+					      <td>15°/25°</td>
+					      <td>50%</td>
+					    </tr>
+
+					  </tbody>
+					</table>
+
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="footer-text">
+						<p>Web desarrollada para obtener el título de grado de Licenciado en Sistema</p>
+						<p>Autor: Fiorentino, Kevin Emanuel</p>
+						<p>Tutor: Amatriain, Hernan Guillermo - Loidi, Laura</p>
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<p>Actual</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<p>Min/Max</p>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<p>Humedad</p>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="footer-text">
+						<p>Universidad Nacional de Lanús</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
-	</main>
+	</footer>
 
 </body>
 </html>

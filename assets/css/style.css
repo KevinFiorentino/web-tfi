@@ -25,6 +25,12 @@ header {
 	background-color: #c5c1c1;
 }
 
+footer {
+    background-color: #141414;
+    margin-top: 30px;
+    height: 150px;
+}
+
 h1 {
     color: black;
     padding-top: 15px; 
@@ -47,9 +53,21 @@ h2, h3 {
 .img-h {
     justify-content: center;
 }
+.img-h-ciudad {
+    justify-content: flex-start;
+    padding: 0 !important;
+}
 .img-container {
     display: flex;
     align-items: start;
+}
+.img-cont-ciudad {
+    align-items: start;
+}
+
+.no-padding {
+    padding-right: 0;
+    padding-left: 0;
 }
 
 .logo-unla {
@@ -152,5 +170,26 @@ h2, h3 {
     font-family: Raleway;
     font-weight: bold;
     font-size: 24px;
+}
+
+.img-ciudad {
+    width: 40px;
+}
+
+.table {
+    color: black;
+    font-family: Raleway;  
+}
+
+.col-name th {
+    font-size: 20px;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #42b883;
+}
+
+.img-cont-ciudad span {
+    margin-top: 10px;
 }
 
