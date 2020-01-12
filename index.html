@@ -32,7 +32,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<h1>App pronóstico del tiempo - Vue.js 2.x.x</h1>
+					<h1>App pronóstico del tiempo - XXX.js x.x.x</h1>
 					<h3>Pronóstico para hoy</h3>	
 				</div>
 			</div>
@@ -122,6 +122,11 @@
 					      </td>
 					      <td>15°/25°</td>
 					      <td>50%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
 					    </tr>
 					    <tr>
 					      <th scope="row">Paris</th>
@@ -131,6 +136,11 @@
 					      </td>
 					      <td>17°/26°</td>
 					      <td>35%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
 					    </tr>
 					    <tr>
 					      <th scope="row">Madrid</th>
@@ -140,47 +150,30 @@
 					      </td>
 					      <td>14°/20°</td>
 					      <td>40%</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">Roma</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>30°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
-					      </td>
-					      <td>15°/25°</td>
-					      <td>50%</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">Paris</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>20°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
-					      </td>
-					      <td>17°/26°</td>
-					      <td>35%</td>
-					    </tr>
-					    <tr>
-					      <th scope="row">Madrid</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>15°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
-					      </td>
-					      <td>14°/20°</td>
-					      <td>40%</td>
-					    </tr>					    
-					    <tr>
-					      <th scope="row">Roma</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>30°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
-					      </td>
-					      <td>15°/25°</td>
-					      <td>50%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
 					    </tr>
 
 					  </tbody>
 					</table>
 
+				</div>
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div id="form-pronostico">
+							<h3>Agregar ciudad a la lista</h3>	
+							<input class="form-control" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
+							<button v-on:click="addCity" class="btn btn-success">Consultar</button>
+							<div class="error-ciudad">
+								<p>Error</p>
+							</div>					
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

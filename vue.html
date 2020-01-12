@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trabajo Final - Kevin</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+	<script src="./js/vue-v2.6.11.js"></script>
+	<script src="./js/vue-resource.js"></script>
+
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="img-container img-v img-h">
+						<img class="img-responsive logo-unla" src="./assets/images/logo_unla.png">
+						<img class="img-responsive logo-vue" src="./assets/images/logo_vue.png">
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="header-tfi">
+						<p>Trabajo Final Integrador</p>
+						<p>Fiorentino, Kevin Emanuel</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main id="clima">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h1>App pronóstico del tiempo - Vue.js 2.6.11</h1>
+					<h3>Buscar pronóstico para hoy</h3>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div id="form-pronostico">
+						<input class="form-control" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
+						<button v-on:click="pronostico_ciudad" class="btn btn-success">Consultar</button>
+						<div class="error-ciudad">
+							<p>{{ error }}</p>
+						</div>					
+					</div>
+				</div>
+
+				<div class="offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"></div>
+
+				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+					<div class="row">
+
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<pronostico-hoy
+								v-for="clima in pronostico"
+								:key="clima.id"
+
+								:descrip="clima.descrip"
+								:icon="clima.icon"
+								:temp="clima.temp"
+								:city="clima.city"	
+							></pronostico-hoy>	
+						</div>
+
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<pronostico-info
+								v-for="clima in pronostico"
+								:key="clima.id"
+
+								:temp_min="clima.temp_min"
+								:temp_max="clima.temp_max"
+								:press="clima.press"
+								:hum="clima.hum"
+								:vis="clima.vis"
+								:wind="clima.wind"
+								:sunrise="clima.sunrise"
+								:sunset="clima.sunset"
+								:fecha="clima.fecha"
+							></pronostico-info>		
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<hr class="hr">
+
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h3>Pronóstico ciudades del mundo</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+					<table class="table table-hover">
+					  	<thead>
+					    	<tr class="col-name">
+						      	<th scope="col">Ciudad</th>
+						      	<th scope="col">Actual</th>
+						      	<th scope="col">Max°/Min°</th>
+						      	<th scope="col">Humedad</th>
+					    	</tr>
+					  	</thead>
+					  	<tbody>
+
+					  		<tr v-for="ciudad in ciudades" v-bind:id="ciudad.id">
+						      <th scope="row">{{ ciudad.city }}</th>
+						      <td class="img-cont-ciudad img-v img-h-ciudad">
+						      	<span>{{ ciudad.temp }}°</span>
+						      	<img class="img-ciudad" v-bind:src="ciudad.icon">
+						      </td>
+						      <td>{{ ciudad.temp_min }}°/{{ ciudad.temp_max }}°</td>
+						      <td>{{ ciudad.hum }}%</td>
+						      <td>
+						      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+						      		<img src="./assets/images/icons/delete.svg">
+						      	</button>
+						  	  </td>
+						    </tr>
+
+					  	</tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div id="form-pronostico">
+							<h3>Agregar ciudad a la lista</h3>	
+							<input class="form-control" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
+							<button v-on:click="addCity" class="btn btn-success">Consultar</button>
+							<div class="error-ciudad">
+								<p>{{ errorCity }}</p>
+							</div>					
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+					<div class="footer-text-left">
+						<p>Web desarrollada para obtener el título de grado de Licenciado en Sistema</p>
+						<p><strong>Autor:</strong> Fiorentino, Kevin Emanuel</p>
+						<p><strong>Tutor:</strong> Amatriain, Hernan Guillermo - Loidi, Laura</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="footer-text-right">
+						<p>Universidad Nacional de Lanús</p>
+						<p></p>
+						<p>2020</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="./js/vue-script.js"></script>
+
+</body>
+</html>

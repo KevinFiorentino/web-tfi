@@ -27,7 +27,7 @@ header {
 
 footer {
     background-color: #141414;
-    margin-top: 30px;
+    margin-top: 50px;
     height: 150px;
     padding-top: 25px;
 }
@@ -118,6 +118,10 @@ h2, h3 {
     font-family: Raleway;
     background: #42b883;
     margin-top: 10px;
+}
+
+.error-ciudad {
+    position: absolute;
 }
 
 .error-ciudad p {
@@ -213,4 +217,14 @@ h2, h3 {
 
 .footer-text-right p ~ p {
     margin-top: 50px;
+}
+
+.button-del {
+    border: none;
+    background-color: white;
+}
+
+.table-hover tbody tr:hover .button-del {
+    background-color: #42b883;
+    cursor: pointer;
 }
