@@ -29,6 +29,7 @@ footer {
     background-color: #141414;
     margin-top: 30px;
     height: 150px;
+    padding-top: 25px;
 }
 
 h1 {
@@ -119,6 +120,12 @@ h2, h3 {
     margin-top: 10px;
 }
 
+.error-ciudad p {
+    font-family: Raleway;
+    color: red;
+    margin-top: 10px;
+}
+
 .pronostico-hoy p {
     color: black;
     font-family: Raleway;
@@ -152,10 +159,11 @@ h2, h3 {
 }
 
 .pronostico-hoy p:nth-child(2n) {
-    font-size: 20px;
+    font-size: 22px;
 }
 
 .img-pronostico {
+    width: 126px;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -193,3 +201,16 @@ h2, h3 {
     margin-top: 10px;
 }
 
+.footer-text-left, .footer-text-right {
+    color: white;
+    font-family: Raleway;
+    font-size: 12px;
+}
+
+.footer-text-right {
+    text-align: right;
+}
+
+.footer-text-right p ~ p {
+    margin-top: 50px;
+}
