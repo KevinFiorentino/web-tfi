@@ -219,6 +219,10 @@ h2, h3 {
     margin-top: 50px;
 }
 
+.footer-text-right a {
+    color: white;
+}
+
 .button-del {
     border: none;
     background-color: white;
