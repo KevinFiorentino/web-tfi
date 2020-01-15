@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Trabajo Final - Kevin</title>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+
+</head>
+<body>
+
+	<header>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="img-container img-v img-h">
+						<img class="img-responsive logo-unla" src="./assets/images/logo_unla.png">
+						<img class="img-responsive logo-angularjs" src="./assets/images/logo_angularjs.png">
+					</div>
+				</div>
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="header-tfi">
+						<p>Trabajo Final Integrador</p>
+						<p>Fiorentino, Kevin Emanuel</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h1>App pronóstico del tiempo - AngularJS 1.7.9</h1>
+					<h3>Pronóstico para hoy</h3>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div id="form-pronostico">
+						<input class="form-control input-angularjs" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
+						<button v-on:click="pronostico_ciudad" class="btn btn-success btn-angularjs">Consultar</button>
+						<div class="error-ciudad">
+							<p>Error</p>
+						</div>					
+					</div>
+				</div>
+
+				<div class="offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"></div>
+
+				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+					<div class="row">
+
+						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+							<div class="pronostico-hoy">
+								<p>Buenos Aires</p>
+								<img class="img-pronostico" src="./assets/images/icons/01d.svg">
+								<p>20°</p>
+								<p>Parcialmente nublado</p>	
+							</div>		
+						</div>
+
+						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+							<div class="pronostico-info">
+								<p>1 enero del 2020</p>
+								<div class="row">
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<div class="info-clima">
+											<p>Min°/Max°:</p>
+											<p>20°/27°</p>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+										<div class="info-clima">
+											<p>Alba/Ocaso:</p>
+											<p>07:30/18:20</p>
+										</div>
+									</div>
+								</div>
+								<p><strong>Humedad: </strong>50%</p>
+								<p><strong>Viento: </strong> 10 km/h</p>
+								<p><strong>Visibilidad: </strong>10000 m.</p>
+								<p><strong>Presión: </strong>1024 mbar.</p>
+							</div>			
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<hr class="hr">
+
+		</div>
+
+		
+
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h3>Pronóstico ciudades del mundo</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+					<table class="table table-hover-angularjs">
+					  <thead>
+					    <tr class="col-name">
+					      <th scope="col">Ciudad</th>
+					      <th scope="col">Actual</th>
+					      <th scope="col">Max°/Min°</th>
+					      <th scope="col">Humedad</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					    <tr>
+					      <th scope="row">Roma</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>30°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      </td>
+					      <td>15°/25°</td>
+					      <td>50%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Paris</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>20°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
+					      </td>
+					      <td>17°/26°</td>
+					      <td>35%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
+					    </tr>
+					    <tr>
+					      <th scope="row">Madrid</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>15°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
+					      </td>
+					      <td>14°/20°</td>
+					      <td>40%</td>
+					   	  <td>
+					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
+					    </tr>
+
+					  </tbody>
+					</table>
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="container">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div id="form-pronostico">
+							<h3>Agregar ciudad a la lista</h3>	
+							<input class="form-control input-angularjs" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
+							<button v-on:click="addCity" class="btn btn-success btn-angularjs">Consultar</button>
+							<div class="error-ciudad">
+								<p>Error</p>
+							</div>					
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+					<div class="footer-text-left">
+						<p>Web desarrollada para obtener el título de grado de Licenciado en Sistema</p>
+						<p>
+							<strong>Autor:</strong> Fiorentino, Kevin Emanuel &nbsp;
+							<a href="https://github.com/KevinFiorentino/web-tesis" target="_blank">
+								<img width="24" src="./assets/images/icons/github-icon.png">
+							</a>
+						</p>
+						<p><strong>Tutor:</strong> Amatriain, Hernan Guillermo - Loidi, Laura</p>
+					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<div class="footer-text-right">
+						<p>
+							<a href="http://www.unla.edu.ar/" target="_blank">Universidad Nacional de Lanús ❯</a>
+						</p>
+						<p></p>
+						<p>2020</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+</body>
+</html>

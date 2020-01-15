@@ -79,7 +79,7 @@ h2, h3 {
     width: 90px;
     padding: 10px 5px 5px 5px;
 }
-.logo-angular {
+.logo-angular, .logo-angularjs {
     width: 100px;
     padding: 2px 5px 5px 5px;
 }
@@ -109,15 +109,35 @@ h2, h3 {
     color: black;
 }
 
-#form-pronostico input:focus {
+#form-pronostico .input-vue:focus {
     box-shadow: 0 0 0 0.2rem #42b883;
 }
-
+#form-pronostico .input-angularjs:focus {
+    box-shadow: 0 0 0 0.2rem #b52e31;
+    border: 1px solid white;
+}
 
 #form-pronostico button {
     font-family: Raleway;
-    background: #42b883;
     margin-top: 10px;
+}
+
+.btn-vue, .btn-angularjs {
+    transition: 0.5s;
+}
+
+.btn-vue:focus, .btn-angularjs:focus, .btn-vue:hover, .btn-angularjs:hover {
+    box-shadow: 2px 2px 0px black;
+    border: 1px solid black !important;
+    transition: 0.5s;
+}
+
+#form-pronostico .btn-vue {
+    background: #42b883;
+}
+#form-pronostico .btn-angularjs {
+    background: #b52e31;
+    border: 1px solid #b52e31;
 }
 
 .error-ciudad {
@@ -197,8 +217,11 @@ h2, h3 {
     font-size: 20px;
 }
 
-.table-hover tbody tr:hover {
+.table-hover-vue tbody tr:hover {
     background-color: #42b883;
+}
+.table-hover-angularjs tbody tr:hover {
+    background-color: #b52e31;
 }
 
 .img-cont-ciudad span {
@@ -228,7 +251,18 @@ h2, h3 {
     background-color: white;
 }
 
-.table-hover tbody tr:hover .button-del {
+.table-hover-vue tr:hover .button-del {
     background-color: #42b883;
     cursor: pointer;
+}
+.table-hover-angularjs tr:hover .button-del {
+    background-color: #b52e31;
+    cursor: pointer;
+}
+
+.table-hover-vue .button-del:focus {
+    outline: 2px solid #42b883;
+}
+.table-hover-angularjs .button-del:focus {
+    outline: 2px solid #b52e31;
 }

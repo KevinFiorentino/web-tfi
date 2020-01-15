@@ -42,8 +42,8 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<div id="form-pronostico">
-						<input class="form-control" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
-						<button v-on:click="pronostico_ciudad" class="btn btn-success">Consultar</button>
+						<input class="form-control input-vue" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
+						<button v-on:click="pronostico_ciudad" class="btn btn-success btn-vue">Consultar</button>
 						<div class="error-ciudad">
 							<p>{{ error }}</p>
 						</div>					
@@ -101,7 +101,7 @@
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-					<table class="table table-hover">
+					<table class="table table-hover-vue">
 					  	<thead>
 					    	<tr class="col-name">
 						      	<th scope="col">Ciudad</th>
@@ -137,8 +137,8 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div id="form-pronostico">
 							<h3>Agregar ciudad a la lista</h3>	
-							<input class="form-control" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
-							<button v-on:click="addCity" class="btn btn-success">Consultar</button>
+							<input class="form-control input-vue" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
+							<button v-on:click="addCity" class="btn btn-success btn-vue">Consultar</button>
 							<div class="error-ciudad">
 								<p>{{ errorCity }}</p>
 							</div>					
