@@ -45,8 +45,8 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<div id="form-pronostico">
-						<input class="form-control" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
-						<button v-on:click="pronostico_ciudad" class="btn btn-success">Consultar</button>
+						<input class="form-control" type="text" name="buscar_ciudad" placeholder="Ingrese una ciudad">
+						<button class="btn btn-success">Consultar</button>
 						<div class="error-ciudad">
 							<p>Error</p>
 						</div>					
@@ -129,7 +129,7 @@
 					      <td>15°/25°</td>
 					      <td>50%</td>
 					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      	<button class="button-del">
 					      		<img src="./assets/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
@@ -143,7 +143,7 @@
 					      <td>17°/26°</td>
 					      <td>35%</td>
 					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      	<button class="button-del">
 					      		<img src="./assets/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
@@ -157,7 +157,7 @@
 					      <td>14°/20°</td>
 					      <td>40%</td>
 					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      	<button class="button-del">
 					      		<img src="./assets/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
@@ -173,8 +173,8 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div id="form-pronostico">
 							<h3>Agregar ciudad a la lista</h3>	
-							<input class="form-control" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
-							<button v-on:click="addCity" class="btn btn-success">Consultar</button>
+							<input class="form-control" type="text" name="add_ciudad" placeholder="Ingrese una ciudad">
+							<button class="btn btn-success">Consultar</button>
 							<div class="error-ciudad">
 								<p>Error</p>
 							</div>					

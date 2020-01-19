@@ -75,7 +75,7 @@ h2, h3 {
     width: 80px;
     padding: 5px 10px 5px 0px;
 }
-.logo-vue {
+.logo-vue, .logo-react {
     width: 90px;
     padding: 10px 5px 5px 5px;
 }
@@ -114,13 +114,18 @@ h2, h3 {
 
 #form-pronostico .input-vue:focus {
     box-shadow: 0 0 0 0.2rem #42b883;
+    border: 1px solid white;
 }
 #form-pronostico .input-angularjs:focus {
     box-shadow: 0 0 0 0.2rem #b52e31;
     border: 1px solid white;
 }
 #form-pronostico .input-jquery:focus {
-    box-shadow: 0 0 0 0.2rem #0769AD;
+    box-shadow: 0 0 0 0.2rem #0769ad;
+    border: 1px solid white;
+}
+#form-pronostico .input-react:focus {
+    box-shadow: 0 0 0 0.2rem #00d8ff;
     border: 1px solid white;
 }
 
@@ -133,7 +138,10 @@ h2, h3 {
     transition: 0.5s;
 }
 
-.btn-vue:focus, .btn-vue:hover, .btn-angularjs:focus, .btn-angularjs:hover, .btn-jquery:focus, .btn-jquery:hover {
+.btn-vue:focus, .btn-vue:hover, 
+.btn-angularjs:focus, .btn-angularjs:hover, 
+.btn-jquery:focus, .btn-jquery:hover, 
+.btn-react:focus, .btn-react:hover {
     box-shadow: 2px 2px 0px black;
     border: 1px solid black !important;
     transition: 0.5s;
@@ -148,8 +156,12 @@ h2, h3 {
     border: 1px solid #b52e31;
 }
 #form-pronostico .btn-jquery {
-    background: #0769AD;
-    border: 1px solid #0769AD;
+    background: #0769ad;
+    border: 1px solid #0769ad;
+}
+#form-pronostico .btn-react {
+    background: #00d8ff;
+    border: 1px solid #00d8ff;
 }
 
 .error-ciudad {
@@ -236,7 +248,10 @@ h2, h3 {
     background-color: #b52e31;
 }
 .table-hover-jquery tbody tr:hover {
-    background-color: #0769AD;
+    background-color: #0769ad;
+}
+.table-hover-react tbody tr:hover {
+    background-color: #00d8ff;
 }
 
 .img-cont-ciudad span {
@@ -275,7 +290,11 @@ h2, h3 {
     cursor: pointer;
 }
 .table-hover-jquery tr:hover .button-del {
-    background-color: #0769AD;
+    background-color: #0769ad;
+    cursor: pointer;
+}
+.table-hover-react tr:hover .button-del {
+    background-color: #00d8ff;
     cursor: pointer;
 }
 
@@ -286,5 +305,8 @@ h2, h3 {
     outline: 2px solid #b52e31;
 }
 .table-hover-jquery .button-del:focus {
-    outline: 2px solid #0769AD;
+    outline: 2px solid #0769ad;
+}
+.table-hover-react .button-del:focus {
+    outline: 2px solid #00d8ff;
 }
