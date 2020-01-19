@@ -25,7 +25,7 @@ $('#buscarCiudad').click(function(){
 			.html(`
 				<p>` + response.name + `</p>
 				<img class="img-pronostico" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
-				<p>` + response.main.temp + `°</p>
+				<p>` + Math.round(response.main.temp) + `°</p>
 				<p>` + getDescription(response.weather[0].icon) + `</p>
 			`)
 
@@ -36,7 +36,7 @@ $('#buscarCiudad').click(function(){
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 						<div class="info-clima">
 							<p>Min°/Max°:</p>
-							<p>` + response.main.temp_min + `°/` + response.main.temp_max + `°</p>
+							<p>` + Math.floor(response.main.temp_min) + `°/` + Math.ceil(response.main.temp_max) + `°</p>
 						</div>
 					</div>
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -54,7 +54,7 @@ $('#buscarCiudad').click(function(){
 
 	}).fail(function() {
 
-		$('.error-ciudad').html('<p>Ciudad no encontrada</p>')
+		$('.error-ciudad').first().html('<p>Ciudad no encontrada</p>')
 
 		$('.pronostico-hoy')
 			.html(`
@@ -124,4 +124,70 @@ function getDescription(icon) {
 			return "Niebla";
 		};break;
 	}
+}
+
+
+var cities = [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, {"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, {"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
+
+$.each(cities, function(index, value){
+	$.get("http://api.openweathermap.org/data/2.5/weather?q=" + value.name + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
+		function(response, status){
+
+		$('#tablaCiudades').append(`
+					    <tr id="` + response.id + `">
+					      <th scope="row">` + response.name + `</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>` + Math.round(response.main.temp) + `°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
+					      </td>
+					      <td>` + Math.floor(response.main.temp_min) + `°/` + Math.ceil(response.main.temp_max) + `°</td>
+					      <td>` + response.main.humidity + `%</td>
+					   	  <td>
+					      	<button onclick="removeCity(` + response.id + `)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
+					    </tr>
+					    `);
+	})
+});
+
+function removeCity(id) {
+	$('#' + id).remove();
+}
+
+function addCity() {
+
+	var addCiudad = $("input[type=text][name=addCiudad]").val()
+
+	$.get("http://api.openweathermap.org/data/2.5/weather?q=" + addCiudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
+		function(response, status){
+
+		$('#tablaCiudades').append(`
+					    <tr id="` + response.id + `">
+					      <th scope="row">` + response.name + `</th>
+					      <td class="img-cont-ciudad img-v img-h-ciudad">
+					      	<span>` + Math.round(response.main.temp) + `°</span>
+					      	<img class="img-ciudad" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
+					      </td>
+					      <td>` + Math.floor(response.main.temp_min) + `°/` + Math.ceil(response.main.temp_max) + `°</td>
+					      <td>` + response.main.humidity + `%</td>
+					   	  <td>
+					      	<button onclick="removeCity(` + response.id + `)" class="button-del">
+					      		<img src="./assets/images/icons/delete.svg">
+					      	</button>
+					  	  </td>
+					    </tr>
+					    `);
+
+	}).fail(function() {
+
+		$('.error-ciudad').last().html('<p>Ciudad no encontrada</p>')
+
+		setTimeout(function(){ 
+			$('.error-ciudad').html('<p></p>'); 
+		}, 3000);
+
+	})
+
 }
