@@ -73,7 +73,7 @@ var kevin = new Vue({
 	    	this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + value + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
-      			this.ciudades.push( {
+      			this.ciudades.push({
 		  			icon: './assets/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
 		  			temp_min: Math.floor(response.data.main.temp_min),
@@ -81,9 +81,8 @@ var kevin = new Vue({
 		  			hum: response.data.main.humidity,
 		  			id: response.data.id,
 		  			city: response.data.name,
-      				}
-      			)
-
+      			})
+      			
       		})
 		})
   	},

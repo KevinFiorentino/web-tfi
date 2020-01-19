@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" dir="ltr">
 <head>
-	<title>Trabajo Final - Kevin</title>
+
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="author" content="Fiorentino, Kevin Emanuel" />
+	<meta name="description" content="Web desarrollada para obtener el título de grado de Licenciado en Sistema" />
+	
+	<title>Trabajo Final - Fiorentino</title>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+	<script src="./js/angularjs-v1.7.9.js"></script>
+	
 
 </head>
-<body>
+<body ng-app="climaApp">
 
 	<header>
 		<div class="container">
@@ -30,7 +37,7 @@
 		</div>
 	</header>
 
-	<main>
+	<main ng-controller="climaCtrl">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -41,10 +48,10 @@
 			<div class="row">
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<div id="form-pronostico">
-						<input class="form-control input-angularjs" type="text" name="buscar_ciudad" v-model="buscar_ciudad" placeholder="Ingrese una ciudad">
-						<button v-on:click="pronostico_ciudad" class="btn btn-success btn-angularjs">Consultar</button>
+						<input class="form-control input-angularjs" type="text" name="buscarCiudad" ng-model="buscarCiudad" placeholder="Ingrese una ciudad">
+						<button ng-click="pronosticoCiudad()" class="btn btn-success btn-angularjs">Consultar</button>
 						<div class="error-ciudad">
-							<p>Error</p>
+							<p>{{ error }}</p>
 						</div>					
 					</div>
 				</div>
@@ -55,36 +62,30 @@
 					<div class="row">
 
 						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-							<div class="pronostico-hoy">
-								<p>Buenos Aires</p>
-								<img class="img-pronostico" src="./assets/images/icons/01d.svg">
-								<p>20°</p>
-								<p>Parcialmente nublado</p>	
-							</div>		
+
+							<pronostico-hoy
+								descrip="{{ descrip }}"
+								icon="{{ icon }}"
+								temp="{{ temp }}"
+								city="{{ city }}"
+							></pronostico-hoy>
+	
 						</div>
 
 						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-							<div class="pronostico-info">
-								<p>1 enero del 2020</p>
-								<div class="row">
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-										<div class="info-clima">
-											<p>Min°/Max°:</p>
-											<p>20°/27°</p>
-										</div>
-									</div>
-									<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-										<div class="info-clima">
-											<p>Alba/Ocaso:</p>
-											<p>07:30/18:20</p>
-										</div>
-									</div>
-								</div>
-								<p><strong>Humedad: </strong>50%</p>
-								<p><strong>Viento: </strong> 10 km/h</p>
-								<p><strong>Visibilidad: </strong>10000 m.</p>
-								<p><strong>Presión: </strong>1024 mbar.</p>
-							</div>			
+
+							<pronostico-info
+								min="{{ temp_min }}"
+								max="{{ temp_max }}"
+								press="{{ press }}"
+								hum="{{ hum }}"
+								vis="{{ vis }}"
+								wind="{{ wind }}"
+								sunrise="{{ sunrise }}"
+								sunset="{{ sunset }}"
+								fecha="{{ fecha }}"
+							></pronostico-info>
+
 						</div>
 
 					</div>
@@ -116,44 +117,17 @@
 					    </tr>
 					  </thead>
 					  <tbody>
-					    <tr>
-					      <th scope="row">Roma</th>
+
+				  		<tr ng-repeat="ciudad in ciudades" id="{{ ciudad.id }}">
+					      <th scope="row">{{ ciudad.city }}</th>
 					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>30°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/01d.svg">
+					      	<span>{{ ciudad.temp }}°</span>
+					      	<img class="img-ciudad" ng-src="{{ ciudad.icon }}">
 					      </td>
-					      <td>15°/25°</td>
-					      <td>50%</td>
-					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
-					      		<img src="./assets/images/icons/delete.svg">
-					      	</button>
-					  	  </td>
-					    </tr>
-					    <tr>
-					      <th scope="row">Paris</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>20°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/03d.svg">
-					      </td>
-					      <td>17°/26°</td>
-					      <td>35%</td>
-					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
-					      		<img src="./assets/images/icons/delete.svg">
-					      	</button>
-					  	  </td>
-					    </tr>
-					    <tr>
-					      <th scope="row">Madrid</th>
-					      <td class="img-cont-ciudad img-v img-h-ciudad">
-					      	<span>15°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/02d.svg">
-					      </td>
-					      <td>14°/20°</td>
-					      <td>40%</td>
-					   	  <td>
-					      	<button v-on:click="removeCity(event, ciudad.id)" class="button-del">
+					      <td>{{ ciudad.temp_min }}°/{{ ciudad.temp_max }}°</td>
+					      <td>{{ ciudad.hum }}%</td>
+					      <td>
+					      	<button ng-click="removeCity(event, ciudad.id)" class="button-del">
 					      		<img src="./assets/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
@@ -169,10 +143,10 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 						<div id="form-pronostico">
 							<h3>Agregar ciudad a la lista</h3>	
-							<input class="form-control input-angularjs" type="text" name="add_ciudad" v-model="add_ciudad" placeholder="Ingrese una ciudad">
-							<button v-on:click="addCity" class="btn btn-success btn-angularjs">Consultar</button>
+							<input class="form-control input-angularjs" type="text" name="addCiudad" ng-model="addCiudad" placeholder="Ingrese una ciudad">
+							<button ng-click="addCity()" class="btn btn-success btn-angularjs">Consultar</button>
 							<div class="error-ciudad">
-								<p>Error</p>
+								<p>{{ errorAdd }}</p>
 							</div>					
 						</div>
 					</div>
@@ -208,6 +182,8 @@
 			</div>
 		</div>
 	</footer>
+
+	<script src="./js/angularjs-script.js"></script>
 
 </body>
 </html>
