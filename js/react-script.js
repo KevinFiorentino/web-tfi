@@ -102,9 +102,9 @@ class AppClima extends React.Component {
 					this.setState ({
 						descrip: getDescription(response.weather[0].icon),
 						icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
-						temp: response.main.temp,
-			  			min: response.main.temp_min,
-			  			max: response.main.temp_max,
+						temp: Math.round(response.main.temp),
+			  			min: Math.floor(response.main.temp_min),
+			  			max: Math.ceil(response.main.temp_max),
 			  			press: response.wind.speed,
 			  			hum: response.main.humidity,
 			  			vis: response.visibility,
@@ -248,7 +248,7 @@ class TRCiudades extends React.Component {
 		      <td>{this.props.min}°/{this.props.max}°</td>
 		      <td>{this.props.hum}%</td>
 		   	  <td>
-		      	<button class="button-del">
+		      	<button class="button-del" onClick={this.props.handleDelete.bind(this, this.props.id)} >
 		      		<img src="./assets/images/icons/delete.svg" />
 		      	</button>
 		  	  </td>
@@ -264,9 +264,9 @@ class FormCiudades extends React.Component {
 				<h3>Agregar ciudad a la lista</h3>	
 				<input class="form-control input-react" type="text" name="addCiudad" 
 					onChange={this.props.handleChangeInput} value={this.props.value} placeholder="Ingrese una ciudad" />
-				<button class="btn btn-success btn-react" onClick={this.props.handleCiudadClick}>Consultar</button>
+				<button class="btn btn-success btn-react" onClick={this.props.handleCiudadClick} >Consultar</button>
 				<div class="error-ciudad">
-					<p>Error</p>
+					<p>{this.props.error}</p>
 				</div>					
 			</div>
         )
@@ -283,44 +283,41 @@ class AppCiudades extends React.Component {
 		
 		this.handleCiudadClick = this.handleCiudadClick.bind(this);
 		this.handleChangeInput = this.handleChangeInput.bind(this);
+		this.handleDelete = this.handleDelete.bind(this);
 
 		this.state = {
-  			icon: './assets/images/icons/clima_default.png',
-  			temp: '--',
-  			min: '--',
-  			max: '--',
-  			hum: '-',
-  			id: 0,
-  			city: '---',
-
+			ciudades: [],
   			value: '',
   			error: '',
 		};
 	}
 
 	componentDidMount() {
-		fetch("http://api.openweathermap.org/data/2.5/weather?q=Bogota&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
-			.then(response => response.json())
-			.then((response) => {
-					this.setState ({
-						icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
-						temp: response.main.temp,
-			  			min: response.main.temp_min,
-			  			max: response.main.temp_max,
-			  			hum: response.main.humidity,
-			  			id: response.id,
-			  			city: response.name,
-					})
+
+		var cities = new Array ("Bogota", "Buenos Aires", "Hong Kong", "Nueva York", "Madrid", "Mosku", "Paris", "Roma", "Sidney", "Viena");
+
+		{cities.map(ciudad => (
+
+			fetch("http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
+				.then(response => response.json())
+				.then((response) => {
+						this.setState ({
+							ciudades: [
+								...this.state.ciudades, 
+								{
+									icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
+									temp: Math.round(response.main.temp),
+						  			min: Math.floor(response.main.temp_min),
+						  			max: Math.ceil(response.main.temp_max),
+						  			hum: response.main.humidity,
+						  			id: response.id,
+						  			city: response.name, 
+					  			}
+					  		]
+						})
 				})
-			.catch((error) => { 
+		))}
 
-				this.setState ({
-		  			error: "Ciudad no encontrada",
-				});	
-
-				setInterval(() => { this.setState ({ error: "", }); }, 3000);	
-
-			});
 	}
 
 	handleCiudadClick(event) {
@@ -328,13 +325,18 @@ class AppCiudades extends React.Component {
 			.then(response => response.json())
 			.then((response) => {
 					this.setState ({
-						icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
-						temp: response.main.temp,
-			  			min: response.main.temp_min,
-			  			max: response.main.temp_max,
-			  			hum: response.main.humidity,
-			  			id: response.id,
-			  			city: response.name,
+						ciudades: [
+							...this.state.ciudades, 
+							{
+								icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
+								temp: Math.round(response.main.temp),
+					  			min: Math.floor(response.main.temp_min),
+					  			max: Math.ceil(response.main.temp_max),
+					  			hum: response.main.humidity,
+					  			id: response.id,
+					  			city: response.name, 
+				  			}
+				  		]
 					})
 				})
 			.catch((error) => { 
@@ -352,6 +354,11 @@ class AppCiudades extends React.Component {
 		this.setState({
 			value: event.target.value
 		});
+	}
+
+	handleDelete(id) {
+		const ciudad = this.state.ciudades.filter(ciudad => ciudad.id !== id);
+    	this.setState({ ciudades: ciudad });
 	}
 
 	render() {
@@ -375,14 +382,20 @@ class AppCiudades extends React.Component {
 						  </thead>
 						  <tbody>
 
-						  	<TRCiudades
-								icon = {this.state.icon}
-								temp = {this.state.temp}
-								min = {this.state.min}
-								max = {this.state.max}
-								hum = {this.state.hum}
-								city = {this.state.city}
-						  	/>
+							  {this.state.ciudades.map(ciudad => (
+
+							  	<TRCiudades
+									icon = {ciudad.icon}
+									temp = {ciudad.temp}
+									min = {ciudad.min}
+									max = {ciudad.max}
+									hum = {ciudad.hum}
+									city = {ciudad.city}
+									id = {ciudad.id}
+									handleDelete = {this.handleDelete}
+							  	/>
+
+							  ))}
 
 						  </tbody>
 						</table>
