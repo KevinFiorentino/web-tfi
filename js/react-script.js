@@ -82,14 +82,14 @@ class AppClima extends React.Component {
   			fecha: fecha,
 
   			value: '',
+  			error: '',
 		};
 	}
 
 	handleClimaClick(event) {
 		fetch("http://api.openweathermap.org/data/2.5/weather?q=" + this.state.value + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
-			.then(res => res.json())
-			.then(
-				(response) => {
+			.then(response => response.json())
+			.then((response) => {
 
 					var sunrise = new Date(response.sys.sunrise * 1000)
 					var sunrise_hours = sunrise.getHours()
@@ -113,29 +113,31 @@ class AppClima extends React.Component {
 			  			sunset: sunset_hours + ':' + sunset_minutes.substr(-2),
 			  			id: response.id,
 			  			city: response.name,
-					});
-				},
-				(error) => {
-					console.log("err")
-					this.setState ({
-			  			descrip: '.....',
-			  			icon: './assets/images/icons/clima_default.png',
-			  			temp: '--',
-			  			temp_min: '--',
-			  			temp_max: '--',
-			  			press: '-',
-			  			hum: '-',
-			  			vis: '-',
-			  			wind: '-',
-			  			sunrise: '--:--',
-			  			sunset: '--:--',
-			  			id: 0,
-			  			city: '---',
+					})
+				})
+			.catch((error) => { 
 
-			  			error: "Ciudad no encontrada",
-					});
-				}
-			)
+				this.setState ({
+		  			descrip: '.....',
+		  			icon: './assets/images/icons/clima_default.png',
+		  			temp: '--',
+		  			temp_min: '--',
+		  			temp_max: '--',
+		  			press: '-',
+		  			hum: '-',
+		  			vis: '-',
+		  			wind: '-',
+		  			sunrise: '--:--',
+		  			sunset: '--:--',
+		  			id: 0,
+		  			city: '---',
+
+		  			error: "Ciudad no encontrada",
+				});	
+
+				setInterval(() => { this.setState ({ error: "", }); }, 3000);	
+
+			});
 	}
 
 	handleChangeInput(event) {
@@ -150,7 +152,7 @@ class AppClima extends React.Component {
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<FormPronostico 
 						handleClimaClick = {this.handleClimaClick}
-						error = {this.error}
+						error = {this.state.error}
 						value = {this.state.value}
 						handleChangeInput = {this.handleChangeInput}
 					/>
