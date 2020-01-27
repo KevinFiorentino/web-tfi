@@ -44,6 +44,12 @@ h2, h3 {
     font-family: Raleway;
 }
 
+.logo-index {
+    width: 150px;
+    display: block;
+    margin: 15px auto 15px auto;
+}
+
 .hr {
     margin-top: 50px;
 }
