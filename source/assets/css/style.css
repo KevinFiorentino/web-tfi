@@ -81,7 +81,7 @@ h2, h3 {
 }
 .logo-angular, .logo-angularjs {
     width: 100px;
-    padding: 2px 5px 5px 5px;
+    padding: 0px 0px 0px 5px;
 }
 .logo-jquery {
     width: 165px;
@@ -116,7 +116,7 @@ h2, h3 {
     box-shadow: 0 0 0 0.2rem #42b883;
     border: 1px solid white;
 }
-#form-pronostico .input-angularjs:focus {
+#form-pronostico .input-angularjs:focus, #form-pronostico .input-angular:focus {
     box-shadow: 0 0 0 0.2rem #b52e31;
     border: 1px solid white;
 }
@@ -139,7 +139,8 @@ h2, h3 {
 }
 
 .btn-vue:focus, .btn-vue:hover, 
-.btn-angularjs:focus, .btn-angularjs:hover, 
+.btn-angularjs:focus, .btn-angularjs:hover,
+.btn-angular:focus, .btn-angular:hover,
 .btn-jquery:focus, .btn-jquery:hover, 
 .btn-react:focus, .btn-react:hover {
     box-shadow: 2px 2px 0px black;
@@ -151,7 +152,7 @@ h2, h3 {
     background: #42b883;
     border: 1px solid #42b883;
 }
-#form-pronostico .btn-angularjs {
+#form-pronostico .btn-angularjs, #form-pronostico .btn-angular {
     background: #b52e31;
     border: 1px solid #b52e31;
 }
@@ -244,7 +245,7 @@ h2, h3 {
 .table-hover-vue tbody tr:hover {
     background-color: #42b883;
 }
-.table-hover-angularjs tbody tr:hover {
+.table-hover-angularjs tbody tr:hover, .table-hover-angular tbody tr:hover {
     background-color: #b52e31;
 }
 .table-hover-jquery tbody tr:hover {
@@ -285,7 +286,7 @@ h2, h3 {
     background-color: #42b883;
     cursor: pointer;
 }
-.table-hover-angularjs tr:hover .button-del {
+.table-hover-angularjs tr:hover .button-del, .table-hover-angular tr:hover .button-del {
     background-color: #b52e31;
     cursor: pointer;
 }
@@ -301,7 +302,7 @@ h2, h3 {
 .table-hover-vue .button-del:focus {
     outline: 2px solid #42b883;
 }
-.table-hover-angularjs .button-del:focus {
+.table-hover-angularjs .button-del:focus, .table-hover-angular .button-del:focus {
     outline: 2px solid #b52e31;
 }
 .table-hover-jquery .button-del:focus {
