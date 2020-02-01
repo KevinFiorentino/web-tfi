@@ -2,10 +2,10 @@ class FormPronostico extends React.Component {
     render() {
         return (
 			<div id="form-pronostico">
-				<input class="form-control input-react" type="text" name="valueCiudad" 
+				<input className="form-control input-react" type="text" name="valueCiudad" 
 					onChange={this.props.handleChangeInput} value={this.props.value} placeholder="Ingrese una ciudad" />
-				<button class="btn btn-success btn-react" onClick={this.props.handleClimaClick} >Consultar</button>
-				<div class="error-ciudad">
+				<button className="btn btn-success btn-react" onClick={this.props.handleClimaClick} >Consultar</button>
+				<div className="error-ciudad">
 					<p>{this.props.error}</p>
 				</div>					
 			</div>
@@ -16,9 +16,9 @@ class FormPronostico extends React.Component {
 class PronosticoHoy extends React.Component {
     render() {
         return (
-			<div class="pronostico-hoy">
+			<div className="pronostico-hoy">
 				<p>{this.props.ciudad}</p>
-				<img class="img-pronostico" src={this.props.icon} />
+				<img className="img-pronostico" src={this.props.icon} />
 				<p>{this.props.temp}°</p>
 				<p>{this.props.descrip}</p>	
 			</div>	
@@ -29,17 +29,17 @@ class PronosticoHoy extends React.Component {
 class PronosticoInfo extends React.Component {
     render() {
         return (
-			<div class="pronostico-info">
+			<div className="pronostico-info">
 				<p>{this.props.fecha}</p>
-				<div class="row">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="info-clima">
+				<div className="row">
+					<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div className="info-clima">
 							<p>Min°/Max°:</p>
 							<p>{this.props.min}°/{this.props.max}°</p>
 						</div>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<div class="info-clima">
+					<div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div className="info-clima">
 							<p>Alba/Ocaso:</p>
 							<p>{this.props.sunrise}/{this.props.sunset}</p>
 						</div>
@@ -149,7 +149,7 @@ class AppClima extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+				<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<FormPronostico 
 						handleClimaClick = {this.handleClimaClick}
 						error = {this.state.error}
@@ -158,12 +158,12 @@ class AppClima extends React.Component {
 					/>
 				</div>
 
-				<div class="offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"></div>
+				<div className="offset-lg-1 offset-md-1 offset-sm-1 offset-xs-1"></div>
 
-				<div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
-					<div class="row">
+				<div className="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+					<div className="row">
 
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+						<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 							<PronosticoHoy 
 								ciudad = {this.state.city}
 								icon = {this.state.icon}
@@ -172,7 +172,7 @@ class AppClima extends React.Component {
 							/>
 						</div>
 
-						<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+						<div className="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 							<PronosticoInfo 
 								fecha = {this.state.fecha}
 								min = {this.state.min}
@@ -239,14 +239,14 @@ class TRCiudades extends React.Component {
         return (
 	  	    <tr>
 		      <th scope="row">{this.props.city}</th>
-		      <td class="img-cont-ciudad img-v img-h-ciudad">
+		      <td className="img-cont-ciudad img-v img-h-ciudad">
 		      	<span>{this.props.temp}°</span>
-		      	<img class="img-ciudad" src={this.props.icon} />
+		      	<img className="img-ciudad" src={this.props.icon} />
 		      </td>
 		      <td>{this.props.min}°/{this.props.max}°</td>
 		      <td>{this.props.hum}%</td>
 		   	  <td>
-		      	<button class="button-del" onClick={this.props.handleDelete.bind(this, this.props.id)} >
+		      	<button className="button-del" onClick={this.props.handleDelete.bind(this, this.props.id)} >
 		      		<img src="./assets/images/icons/delete.svg" />
 		      	</button>
 		  	  </td>
@@ -260,10 +260,10 @@ class FormCiudades extends React.Component {
         return (
 			<div id="form-pronostico">
 				<h3>Agregar ciudad a la lista</h3>	
-				<input class="form-control input-react" type="text" name="addCiudad" 
+				<input className="form-control input-react" type="text" name="addCiudad" 
 					onChange={this.props.handleChangeInput} value={this.props.value} placeholder="Ingrese una ciudad" />
-				<button class="btn btn-success btn-react" onClick={this.props.handleCiudadClick} >Consultar</button>
-				<div class="error-ciudad">
+				<button className="btn btn-success btn-react" onClick={this.props.handleCiudadClick} >Consultar</button>
+				<div className="error-ciudad">
 					<p>{this.props.error}</p>
 				</div>					
 			</div>
@@ -362,16 +362,16 @@ class AppCiudades extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<div className="row">
+					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<h3>Pronóstico ciudades del mundo</h3>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<table class="table table-hover-react">
+				<div className="row">
+					<div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<table className="table table-hover-react">
 						  <thead>
-						    <tr class="col-name">
+						    <tr className="col-name">
 						      <th scope="col">Ciudad</th>
 						      <th scope="col">Actual</th>
 						      <th scope="col">Max°/Min°</th>
@@ -400,9 +400,9 @@ class AppCiudades extends React.Component {
 
 					</div>
 				</div>
-				<div class="row">
-					<div class="container">
-						<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+				<div className="row">
+					<div className="container">
+						<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 
 							<FormCiudades 
 								handleCiudadClick = {this.handleCiudadClick}
