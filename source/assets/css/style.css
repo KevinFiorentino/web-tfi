@@ -92,6 +92,10 @@ h2, h3 {
 .logo-jquery {
     width: 165px;
 }
+.logo-jquery-index {
+    width: 240px;
+    margin-bottom: 0;
+}
 
 .header-tfi p {
     font-family: Raleway;
