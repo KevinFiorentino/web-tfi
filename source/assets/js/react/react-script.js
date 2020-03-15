@@ -67,7 +67,7 @@ class AppClima extends React.Component {
 
 		this.state = {
   			descrip: '.....',
-  			icon: './assets/images/icons/clima_default.png',
+  			icon: 'public/images/icons/clima_default.png',
   			temp: '--',
   			min: '--',
   			max: '--',
@@ -87,7 +87,7 @@ class AppClima extends React.Component {
 	}
 
 	handleClimaClick(event) {
-		fetch("http://api.openweathermap.org/data/2.5/weather?q=" + this.state.value + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
+		fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.state.value + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
 			.then(response => response.json())
 			.then((response) => {
 
@@ -101,7 +101,7 @@ class AppClima extends React.Component {
 
 					this.setState ({
 						descrip: getDescription(response.weather[0].icon),
-						icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
+						icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
 						temp: Math.round(response.main.temp),
 			  			min: Math.floor(response.main.temp_min),
 			  			max: Math.ceil(response.main.temp_max),
@@ -119,7 +119,7 @@ class AppClima extends React.Component {
 
 				this.setState ({
 		  			descrip: '.....',
-		  			icon: './assets/images/icons/clima_default.png',
+		  			icon: 'public/images/icons/clima_default.png',
 		  			temp: '--',
 		  			temp_min: '--',
 		  			temp_max: '--',
@@ -247,7 +247,7 @@ class TRCiudades extends React.Component {
 		      <td>{this.props.hum}%</td>
 		   	  <td>
 		      	<button className="button-del" onClick={this.props.handleDelete.bind(this, this.props.id)} >
-		      		<img src="./assets/images/icons/delete.svg" />
+		      		<img src="public/images/icons/delete.svg" />
 		      	</button>
 		  	  </td>
 		    </tr>
@@ -296,14 +296,14 @@ class AppCiudades extends React.Component {
 
 		{cities.map(ciudad => (
 
-			fetch("http://api.openweathermap.org/data/2.5/weather?q=" + ciudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
+			fetch("https://api.openweathermap.org/data/2.5/weather?q=" + ciudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
 				.then(response => response.json())
 				.then((response) => {
 						this.setState ({
 							ciudades: [
 								...this.state.ciudades, 
 								{
-									icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
+									icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
 									temp: Math.round(response.main.temp),
 						  			min: Math.floor(response.main.temp_min),
 						  			max: Math.ceil(response.main.temp_max),
@@ -319,14 +319,14 @@ class AppCiudades extends React.Component {
 	}
 
 	handleCiudadClick(event) {
-		fetch("http://api.openweathermap.org/data/2.5/weather?q=" + this.state.value + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
+		fetch("https://api.openweathermap.org/data/2.5/weather?q=" + this.state.value + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94")
 			.then(response => response.json())
 			.then((response) => {
 					this.setState ({
 						ciudades: [
 							...this.state.ciudades, 
 							{
-								icon: './assets/images/icons/' + response.weather[0].icon + '.svg',
+								icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
 								temp: Math.round(response.main.temp),
 					  			min: Math.floor(response.main.temp_min),
 					  			max: Math.ceil(response.main.temp_max),

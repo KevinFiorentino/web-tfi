@@ -44,7 +44,7 @@ var kevin = new Vue({
   		pronostico: [
   			{ 	
 	  			descrip: '.....',
-	  			icon: './assets/images/icons/clima_default.png',
+	  			icon: 'public/images/icons/clima_default.png',
 	  			temp: '--',
 	  			temp_min: '--',
 	  			temp_max: '--',
@@ -70,11 +70,11 @@ var kevin = new Vue({
 		var cities = new Array ("Bogota", "Buenos Aires", "Hong Kong", "Nueva York", "Madrid", "Mosku", "Paris", "Roma", "Sidney", "Viena")
 
 		cities.forEach((value) => {
-	    	this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + value + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
+	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + value + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
       			this.ciudades.push({
-		  			icon: './assets/images/icons/' + response.data.weather[0].icon + '.svg',
+		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
 		  			temp_min: Math.floor(response.data.main.temp_min),
 		  			temp_max: Math.ceil(response.data.main.temp_max),
@@ -90,11 +90,11 @@ var kevin = new Vue({
 	methods: {
 		pronostico_ciudad: function (event) {
 
-	    	this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.buscar_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
+	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + this.buscar_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
 		        this.pronostico[0].descrip = this.getDescription(response.data.weather[0].icon)
-				this.pronostico[0].icon = './assets/images/icons/' + response.data.weather[0].icon + '.svg'
+				this.pronostico[0].icon = 'public/images/icons/' + response.data.weather[0].icon + '.svg'
 				this.pronostico[0].temp = Math.round(response.data.main.temp)
 				this.pronostico[0].temp_min = Math.floor(response.data.main.temp_min)
 				this.pronostico[0].temp_max = Math.ceil(response.data.main.temp_max)
@@ -119,7 +119,7 @@ var kevin = new Vue({
 
       			this.error = "Ciudad no encontrada"
       			this.pronostico[0].descrip = '.....'
-				this.pronostico[0].icon = './assets/images/icons/clima_default.png'
+				this.pronostico[0].icon = 'public/images/icons/clima_default.png'
 				this.pronostico[0].temp = '--'
 				this.pronostico[0].temp_min = '--'
 				this.pronostico[0].temp_max = '--'
@@ -171,11 +171,11 @@ var kevin = new Vue({
 
 		addCity: function (event) {
 
-	    	this.$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + this.add_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
+	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + this.add_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
       			this.ciudades.push( {
-		  			icon: './assets/images/icons/' + response.data.weather[0].icon + '.svg',
+		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
 		  			temp_min: Math.floor(response.data.main.temp_min),
 		  			temp_max: Math.ceil(response.data.main.temp_max),

@@ -8,7 +8,7 @@ $('#buscarCiudad').click(function(){
 
 	var buscar = $("input[type=text][name=buscar]").val()
 
-	$.get("http://api.openweathermap.org/data/2.5/weather?q=" + buscar + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
+	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + buscar + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
 		var sunrise = new Date(response.sys.sunrise * 1000)
@@ -24,7 +24,7 @@ $('#buscarCiudad').click(function(){
 		$('.pronostico-hoy')
 			.html(`
 				<p>` + response.name + `</p>
-				<img class="img-pronostico" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
+				<img class="img-pronostico" src="public/images/icons/` + response.weather[0].icon + `.svg">
 				<p>` + Math.round(response.main.temp) + `°</p>
 				<p>` + getDescription(response.weather[0].icon) + `</p>
 			`)
@@ -59,7 +59,7 @@ $('#buscarCiudad').click(function(){
 		$('.pronostico-hoy')
 			.html(`
 				<p>---</p>
-				<img class="img-pronostico" src="./assets/images/icons/clima_default.png">
+				<img class="img-pronostico" src="public/images/icons/clima_default.png">
 				<p>--°</p>
 				<p>.....</p>
 			`)
@@ -130,7 +130,7 @@ function getDescription(icon) {
 var cities = [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, {"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, {"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
 
 $.each(cities, function(index, value){
-	$.get("http://api.openweathermap.org/data/2.5/weather?q=" + value.name + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
+	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + value.name + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
 		$('#tablaCiudades').append(`
@@ -138,13 +138,13 @@ $.each(cities, function(index, value){
 					      <th scope="row">` + response.name + `</th>
 					      <td class="img-cont-ciudad img-v img-h-ciudad">
 					      	<span>` + Math.round(response.main.temp) + `°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
+					      	<img class="img-ciudad" src="public/images/icons/` + response.weather[0].icon + `.svg">
 					      </td>
 					      <td>` + Math.floor(response.main.temp_min) + `°/` + Math.ceil(response.main.temp_max) + `°</td>
 					      <td>` + response.main.humidity + `%</td>
 					   	  <td>
 					      	<button onclick="removeCity(` + response.id + `)" class="button-del">
-					      		<img src="./assets/images/icons/delete.svg">
+					      		<img src="public/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
 					    </tr>
@@ -160,7 +160,7 @@ function addCity() {
 
 	var addCiudad = $("input[type=text][name=addCiudad]").val()
 
-	$.get("http://api.openweathermap.org/data/2.5/weather?q=" + addCiudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
+	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + addCiudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
 		$('#tablaCiudades').append(`
@@ -168,13 +168,13 @@ function addCity() {
 					      <th scope="row">` + response.name + `</th>
 					      <td class="img-cont-ciudad img-v img-h-ciudad">
 					      	<span>` + Math.round(response.main.temp) + `°</span>
-					      	<img class="img-ciudad" src="./assets/images/icons/` + response.weather[0].icon + `.svg">
+					      	<img class="img-ciudad" src="public/images/icons/` + response.weather[0].icon + `.svg">
 					      </td>
 					      <td>` + Math.floor(response.main.temp_min) + `°/` + Math.ceil(response.main.temp_max) + `°</td>
 					      <td>` + response.main.humidity + `%</td>
 					   	  <td>
 					      	<button onclick="removeCity(` + response.id + `)" class="button-del">
-					      		<img src="./assets/images/icons/delete.svg">
+					      		<img src="public/images/icons/delete.svg">
 					      	</button>
 					  	  </td>
 					    </tr>

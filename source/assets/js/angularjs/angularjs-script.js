@@ -56,7 +56,7 @@ angular.module('climaApp')
 	.controller('climaCtrl', function($scope, $http, $timeout) {
 		
 	  	$scope.descrip = "....."
-		$scope.icon = "./assets/images/icons/clima_default.png"
+		$scope.icon = "public/images/icons/clima_default.png"
 		$scope.temp = "--"
 		$scope.temp_min = "--"
 		$scope.temp_max = "--"
@@ -79,11 +79,11 @@ angular.module('climaApp')
 
 		$scope.ciudades = []
 		angular.forEach(cities, function(value) {
-			$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + value.name + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
+			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + value.name + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
       			$scope.ciudades.push({
-		  			icon: './assets/images/icons/' + response.data.weather[0].icon + '.svg',
+		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
 		  			temp_min: Math.floor(response.data.main.temp_min),
 		  			temp_max: Math.ceil(response.data.main.temp_max),
@@ -97,11 +97,11 @@ angular.module('climaApp')
 
 		$scope.pronosticoCiudad = function() {
 
-			$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + $scope.buscarCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
+			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + $scope.buscarCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
 			    $scope.descrip = getDescription(response.data.weather[0].icon)
-				$scope.icon = './assets/images/icons/' + response.data.weather[0].icon + '.svg'
+				$scope.icon = 'public/images/icons/' + response.data.weather[0].icon + '.svg'
 				$scope.temp = Math.round(response.data.main.temp)
 
 				$scope.temp_min = Math.floor(response.data.main.temp_min)
@@ -126,7 +126,7 @@ angular.module('climaApp')
 
 				$scope.error = "Ciudad no encontrada"
 				$scope.descrip = "....."
-				$scope.icon = "./assets/images/icons/clima_default.png"
+				$scope.icon = "public/images/icons/clima_default.png"
 				$scope.temp = "--"
 				$scope.temp_min = "--"
 				$scope.temp_max = "--"
@@ -146,11 +146,11 @@ angular.module('climaApp')
 		$scope.addCiudad = ""
 		$scope.addCity = function(event) {
 
-			$http.get('http://api.openweathermap.org/data/2.5/weather?q=' + $scope.addCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
+			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + $scope.addCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
 		        	$scope.ciudades.push({
-			  			icon: './assets/images/icons/' + response.data.weather[0].icon + '.svg',
+			  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 			  			temp: Math.round(response.data.main.temp),
 			  			temp_min: Math.floor(response.data.main.temp_min),
 			  			temp_max: Math.ceil(response.data.main.temp_max),
