@@ -3,29 +3,30 @@ const app = express();
 const path = require('path');
 const router = express.Router();
 
-app.use('/public', express.static('source/assets'));
+app.use('/public', express.static('src/assets'));
 
+//Home
 router.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/source/index.html'));
-  //__dirname : It will resolve to your project folder.
+  res.sendFile(path.join(__dirname+'/src/index.html'));
 });
 
+//Pages frameworks
 router.get('/vue',function(req,res){
-  res.sendFile(path.join(__dirname+'/source/vue.html'));
+  res.sendFile(path.join(__dirname+'/src/vue.html'));
 });
 
 router.get('/angularjs',function(req,res){
-  res.sendFile(path.join(__dirname+'/source/angularjs.html'));
+  res.sendFile(path.join(__dirname+'/src/angularjs.html'));
 });
 
 router.get('/jquery',function(req,res){
-  res.sendFile(path.join(__dirname+'/source/jquery.html'));
+  res.sendFile(path.join(__dirname+'/src/jquery.html'));
 });
 
 router.get('/react',function(req,res){
-  res.sendFile(path.join(__dirname+'/source/react.html'));
+  res.sendFile(path.join(__dirname+'/src/react.html'));
 });
 
-//add the router
+//Route and port
 app.use('/', router);
 app.listen(process.env.PORT || 5000);
