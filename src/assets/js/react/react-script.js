@@ -105,7 +105,7 @@ class AppClima extends React.Component {
 						temp: Math.round(response.main.temp),
 			  			min: Math.floor(response.main.temp_min),
 			  			max: Math.ceil(response.main.temp_max),
-			  			press: response.wind.speed,
+			  			press: response.main.pressure,
 			  			hum: response.main.humidity,
 			  			vis: response.visibility,
 			  			wind: response.wind.speed,
