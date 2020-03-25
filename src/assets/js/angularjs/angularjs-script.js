@@ -40,42 +40,44 @@ angular.module("climaApp")
 						<p><strong>Presión: </strong>{{ $ctrl.press }} mbar.</p>
 				   </div>`,
 		bindings: { 
-			min: '@',
-			max: '@',
-			press: '@',
-			hum: '@',
-			vis: '@',
-			wind: '@',
-			sunrise: '@',
-			sunset: '@',
-			fecha: '@',
+			min: 		'@',
+			max: 		'@',
+			press: 		'@',
+			hum: 		'@',
+			vis: 		'@',
+			wind: 		'@',
+			sunrise: 	'@',
+			sunset: 	'@',
+			fecha: 		'@',
 		}
 	});
 
 angular.module('climaApp')
 	.controller('climaCtrl', function($scope, $http, $timeout) {
 		
-	  	$scope.descrip = "....."
-		$scope.icon = "public/images/icons/clima_default.png"
-		$scope.temp = "--"
+	  	$scope.descrip 	= "....."
+		$scope.icon 	= "public/images/icons/clima_default.png"
+		$scope.temp 	= "--"
 		$scope.temp_min = "--"
 		$scope.temp_max = "--"
-		$scope.press = "-"
-		$scope.hum = "-"
-		$scope.vis = "-"
-		$scope.wind = "-"
-		$scope.sunrise = "--:--"
-		$scope.sunset = "--:--"
-		$scope.city = "---"
+		$scope.press 	= "-"
+		$scope.hum 		= "-"
+		$scope.vis 		= "-"
+		$scope.wind 	= "-"
+		$scope.sunrise 	= "--:--"
+		$scope.sunset 	= "--:--"
+		$scope.city 	= "---"
 
-		$scope.error = ''
+		$scope.error 	= ''
 		$scope.errorAdd = ''
 
-		var meses = new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
-		var f = new Date()
-		$scope.fecha = f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
+		var meses	 	= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+		var f 			= new Date()
+		$scope.fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 
-		var cities = [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, {"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, {"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
+		var cities 		= [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, 
+			{"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, 
+			{"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
 
 		$scope.ciudades = []
 		angular.forEach(cities, function(value) {
@@ -100,43 +102,43 @@ angular.module('climaApp')
 			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + $scope.buscarCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
-			    $scope.descrip = getDescription(response.data.weather[0].icon)
-				$scope.icon = 'public/images/icons/' + response.data.weather[0].icon + '.svg'
-				$scope.temp = Math.round(response.data.main.temp)
+			    $scope.descrip 	= getDescription(response.data.weather[0].icon)
+				$scope.icon 	= 'public/images/icons/' + response.data.weather[0].icon + '.svg'
+				$scope.temp 	= Math.round(response.data.main.temp)
 
 				$scope.temp_min = Math.floor(response.data.main.temp_min)
 				$scope.temp_max = Math.ceil(response.data.main.temp_max)
-				$scope.press = response.data.main.pressure
-				$scope.hum = response.data.main.humidity
-				$scope.vis = response.data.visibility
-				$scope.wind = response.data.wind.speed
-				$scope.city = response.data.name
+				$scope.press 	= response.data.main.pressure
+				$scope.hum 		= response.data.main.humidity
+				$scope.vis 		= response.data.visibility
+				$scope.wind 	= response.data.wind.speed
+				$scope.city 	= response.data.name
 
-				var sunrise = new Date(response.data.sys.sunrise * 1000)
-				var sunrise_hours = sunrise.getHours()
+				var sunrise 		= new Date(response.data.sys.sunrise * 1000)
+				var sunrise_hours 	= sunrise.getHours()
 				var sunrise_minutes = "0" + sunrise.getMinutes()
-				$scope.sunrise = sunrise_hours + ':' + sunrise_minutes.substr(-2)
+				$scope.sunrise 		= sunrise_hours + ':' + sunrise_minutes.substr(-2)
 
-				var sunset = new Date(response.data.sys.sunset * 1000)
-				var sunset_hours = sunset.getHours()
-				var sunset_minutes = "0" + sunset.getMinutes()
-				$scope.sunset = sunset_hours + ':' + sunset_minutes.substr(-2)
+				var sunset 			= new Date(response.data.sys.sunset * 1000)
+				var sunset_hours 	= sunset.getHours()
+				var sunset_minutes 	= "0" + sunset.getMinutes()
+				$scope.sunset 		= sunset_hours + ':' + sunset_minutes.substr(-2)
 
 			}, function(response){
 
-				$scope.error = "Ciudad no encontrada"
-				$scope.descrip = "....."
-				$scope.icon = "public/images/icons/clima_default.png"
-				$scope.temp = "--"
+				$scope.error 	= "Ciudad no encontrada"
+				$scope.descrip 	= "....."
+				$scope.icon 	= "public/images/icons/clima_default.png"
+				$scope.temp 	= "--"
 				$scope.temp_min = "--"
 				$scope.temp_max = "--"
-				$scope.press = "-"
-				$scope.hum = "-"
-				$scope.vis = "-"
-				$scope.wind = "-"
-				$scope.sunrise = "--:--"
-				$scope.sunset = "--:--"
-				$scope.city = "---"
+				$scope.press 	= "-"
+				$scope.hum 		= "-"
+				$scope.vis 		= "-"
+				$scope.wind 	= "-"
+				$scope.sunrise 	= "--:--"
+				$scope.sunset 	= "--:--"
+				$scope.city 	= "---"
 
 				$timeout(() => $scope.error = '', 3000);
 

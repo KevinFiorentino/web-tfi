@@ -62,27 +62,27 @@ class AppClima extends React.Component {
 		var f = new Date()
 		var fecha = f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 		
-		this.handleClimaClick = this.handleClimaClick.bind(this);
-		this.handleChangeInput = this.handleChangeInput.bind(this);
+		this.handleClimaClick 	= this.handleClimaClick.bind(this);
+		this.handleChangeInput 	= this.handleChangeInput.bind(this);
 
 		this.state = {
-  			descrip: '.....',
-  			icon: 'public/images/icons/clima_default.png',
-  			temp: '--',
-  			min: '--',
-  			max: '--',
-  			press: '-',
-  			hum: '-',
-  			vis: '-',
-  			wind: '-',
-  			sunrise: '--:--',
-  			sunset: '--:--',
-  			id: 0,
-  			city: '---',
-  			fecha: fecha,
+  			descrip: 	'.....',
+  			icon: 		'public/images/icons/clima_default.png',
+  			temp: 		'--',
+  			min: 		'--',
+  			max: 		'--',
+  			press: 		'-',
+  			hum: 		'-',
+  			vis: 		'-',
+  			wind: 		'-',
+  			sunrise: 	'--:--',
+  			sunset: 	'--:--',
+  			id: 		0,
+  			city: 		'---',
+  			fecha: 		fecha,
 
-  			value: '',
-  			error: '',
+  			value: 		'',
+  			error: 		'',
 		};
 	}
 
@@ -91,48 +91,48 @@ class AppClima extends React.Component {
 			.then(response => response.json())
 			.then((response) => {
 
-					var sunrise = new Date(response.sys.sunrise * 1000)
-					var sunrise_hours = sunrise.getHours()
+					var sunrise 		= new Date(response.sys.sunrise * 1000)
+					var sunrise_hours 	= sunrise.getHours()
 					var sunrise_minutes = "0" + sunrise.getMinutes()
 
-					var sunset = new Date(response.sys.sunset * 1000)
-					var sunset_hours = sunset.getHours()
-					var sunset_minutes = "0" + sunset.getMinutes()
+					var sunset 			= new Date(response.sys.sunset * 1000)
+					var sunset_hours 	= sunset.getHours()
+					var sunset_minutes 	= "0" + sunset.getMinutes()
 
 					this.setState ({
-						descrip: getDescription(response.weather[0].icon),
-						icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
-						temp: Math.round(response.main.temp),
-			  			min: Math.floor(response.main.temp_min),
-			  			max: Math.ceil(response.main.temp_max),
-			  			press: response.main.pressure,
-			  			hum: response.main.humidity,
-			  			vis: response.visibility,
-			  			wind: response.wind.speed,
-			  			sunrise: sunrise_hours + ':' + sunrise_minutes.substr(-2),
-			  			sunset: sunset_hours + ':' + sunset_minutes.substr(-2),
-			  			id: response.id,
-			  			city: response.name,
+						descrip: 	getDescription(response.weather[0].icon),
+						icon: 		'public/images/icons/' + response.weather[0].icon + '.svg',
+						temp: 		Math.round(response.main.temp),
+			  			min: 		Math.floor(response.main.temp_min),
+			  			max: 		Math.ceil(response.main.temp_max),
+			  			press: 		response.main.pressure,
+			  			hum: 		response.main.humidity,
+			  			vis: 		response.visibility,
+			  			wind: 		response.wind.speed,
+			  			sunrise: 	sunrise_hours + ':' + sunrise_minutes.substr(-2),
+			  			sunset: 	sunset_hours + ':' + sunset_minutes.substr(-2),
+			  			id: 		response.id,
+			  			city: 		response.name,
 					})
 				})
 			.catch((error) => { 
 
 				this.setState ({
-		  			descrip: '.....',
-		  			icon: 'public/images/icons/clima_default.png',
-		  			temp: '--',
-		  			temp_min: '--',
-		  			temp_max: '--',
-		  			press: '-',
-		  			hum: '-',
-		  			vis: '-',
-		  			wind: '-',
-		  			sunrise: '--:--',
-		  			sunset: '--:--',
-		  			id: 0,
-		  			city: '---',
+		  			descrip: 	'.....',
+		  			icon: 		'public/images/icons/clima_default.png',
+		  			temp: 		'--',
+		  			temp_min: 	'--',
+		  			temp_max: 	'--',
+		  			press: 		'-',
+		  			hum: 		'-',
+		  			vis: 		'-',
+		  			wind: 		'-',
+		  			sunrise: 	'--:--',
+		  			sunset: 	'--:--',
+		  			id: 		0,
+		  			city: 		'---',
 
-		  			error: "Ciudad no encontrada",
+		  			error: 		"Ciudad no encontrada",
 				});	
 
 				setInterval(() => { this.setState ({ error: "", }); }, 3000);	
@@ -151,10 +151,10 @@ class AppClima extends React.Component {
 			<React.Fragment>
 				<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<FormPronostico 
-						handleClimaClick = {this.handleClimaClick}
-						error = {this.state.error}
-						value = {this.state.value}
-						handleChangeInput = {this.handleChangeInput}
+						handleClimaClick 	= {this.handleClimaClick}
+						error 				= {this.state.error}
+						value 				= {this.state.value}
+						handleChangeInput 	= {this.handleChangeInput}
 					/>
 				</div>
 
@@ -165,24 +165,24 @@ class AppClima extends React.Component {
 
 						<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 							<PronosticoHoy 
-								ciudad = {this.state.city}
-								icon = {this.state.icon}
-								temp = {this.state.temp}
+								ciudad 	= {this.state.city}
+								icon 	= {this.state.icon}
+								temp 	= {this.state.temp}
 								descrip = {this.state.descrip}
 							/>
 						</div>
 
 						<div className="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 							<PronosticoInfo 
-								fecha = {this.state.fecha}
-								min = {this.state.min}
-								max = {this.state.max}
-								sunrise = {this.state.sunrise}
-								sunset = {this.state.sunset}
-								hum = {this.state.hum}
-								wind = {this.state.wind}
-								vis = {this.state.vis}
-								press = {this.state.press}
+								fecha 		= {this.state.fecha}
+								min 		= {this.state.min}
+								max 		= {this.state.max}
+								sunrise 	= {this.state.sunrise}
+								sunset 		= {this.state.sunset}
+								hum 		= {this.state.hum}
+								wind 		= {this.state.wind}
+								vis 		= {this.state.vis}
+								press 		= {this.state.press}
 							/>		
 						</div>
 
@@ -275,18 +275,19 @@ class AppCiudades extends React.Component {
 	constructor(props) {
 		super(props);
 
-		var meses = new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
-		var f = new Date()
-		var fecha = f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
+		var meses 	= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", 
+			"Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+		var f 		= new Date()
+		var fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 		
-		this.handleCiudadClick = this.handleCiudadClick.bind(this);
-		this.handleChangeInput = this.handleChangeInput.bind(this);
-		this.handleDelete = this.handleDelete.bind(this);
+		this.handleCiudadClick 	= this.handleCiudadClick.bind(this);
+		this.handleChangeInput 	= this.handleChangeInput.bind(this);
+		this.handleDelete 		= this.handleDelete.bind(this);
 
 		this.state = {
-			ciudades: [],
-  			value: '',
-  			error: '',
+			ciudades: 	[],
+  			value: 		'',
+  			error: 		'',
 		};
 	}
 
@@ -303,13 +304,13 @@ class AppCiudades extends React.Component {
 							ciudades: [
 								...this.state.ciudades, 
 								{
-									icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
-									temp: Math.round(response.main.temp),
-						  			min: Math.floor(response.main.temp_min),
-						  			max: Math.ceil(response.main.temp_max),
-						  			hum: response.main.humidity,
-						  			id: response.id,
-						  			city: response.name, 
+									icon: 	'public/images/icons/' + response.weather[0].icon + '.svg',
+									temp: 	Math.round(response.main.temp),
+						  			min: 	Math.floor(response.main.temp_min),
+						  			max: 	Math.ceil(response.main.temp_max),
+						  			hum: 	response.main.humidity,
+						  			id: 	response.id,
+						  			city: 	response.name, 
 					  			}
 					  		]
 						})
@@ -326,13 +327,13 @@ class AppCiudades extends React.Component {
 						ciudades: [
 							...this.state.ciudades, 
 							{
-								icon: 'public/images/icons/' + response.weather[0].icon + '.svg',
-								temp: Math.round(response.main.temp),
-					  			min: Math.floor(response.main.temp_min),
-					  			max: Math.ceil(response.main.temp_max),
-					  			hum: response.main.humidity,
-					  			id: response.id,
-					  			city: response.name, 
+								icon: 	'public/images/icons/' + response.weather[0].icon + '.svg',
+								temp: 	Math.round(response.main.temp),
+					  			min: 	Math.floor(response.main.temp_min),
+					  			max: 	Math.ceil(response.main.temp_max),
+					  			hum: 	response.main.humidity,
+					  			id: 	response.id,
+					  			city: 	response.name, 
 				  			}
 				  		]
 					})
@@ -383,14 +384,14 @@ class AppCiudades extends React.Component {
 							  {this.state.ciudades.map(ciudad => (
 
 							  	<TRCiudades
-									icon = {ciudad.icon}
-									temp = {ciudad.temp}
-									min = {ciudad.min}
-									max = {ciudad.max}
-									hum = {ciudad.hum}
-									city = {ciudad.city}
-									id = {ciudad.id}
-									handleDelete = {this.handleDelete}
+									icon 			= {ciudad.icon}
+									temp 			= {ciudad.temp}
+									min 			= {ciudad.min}
+									max 			= {ciudad.max}
+									hum 			= {ciudad.hum}
+									city 			= {ciudad.city}
+									id 				= {ciudad.id}
+									handleDelete 	= {this.handleDelete}
 							  	/>
 
 							  ))}
@@ -405,10 +406,10 @@ class AppCiudades extends React.Component {
 						<div className="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 
 							<FormCiudades 
-								handleCiudadClick = {this.handleCiudadClick}
-								error = {this.state.error}
-								value = {this.state.value}
-								handleChangeInput = {this.handleChangeInput}
+								handleCiudadClick 	= {this.handleCiudadClick}
+								error 				= {this.state.error}
+								value 				= {this.state.value}
+								handleChangeInput 	= {this.handleChangeInput}
 							/>
 
 						</div>

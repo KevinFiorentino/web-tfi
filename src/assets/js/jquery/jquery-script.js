@@ -1,6 +1,6 @@
-var meses = new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
-var f = new Date()
-var fecha = f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
+var meses 	= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+var f 		= new Date()
+var fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 
 $('.pronostico-info p').first().html(fecha)
 
@@ -11,15 +11,15 @@ $('#buscarCiudad').click(function(){
 	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + buscar + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
-		var sunrise = new Date(response.sys.sunrise * 1000)
-		var sunrise_hours = sunrise.getHours()
-		var sunrise_minutes = "0" + sunrise.getMinutes()
-		sunrise = sunrise_hours + ':' + sunrise_minutes.substr(-2)
+		var sunrise 			= new Date(response.sys.sunrise * 1000)
+		var sunrise_hours 		= sunrise.getHours()
+		var sunrise_minutes 	= "0" + sunrise.getMinutes()
+		sunrise 				= sunrise_hours + ':' + sunrise_minutes.substr(-2)
 
-		var sunset = new Date(response.sys.sunset * 1000)
-		var sunset_hours = sunset.getHours()
-		var sunset_minutes = "0" + sunset.getMinutes()
-		sunset = sunset_hours + ':' + sunset_minutes.substr(-2)
+		var sunset 				= new Date(response.sys.sunset * 1000)
+		var sunset_hours 		= sunset.getHours()
+		var sunset_minutes 		= "0" + sunset.getMinutes()
+		sunset 					= sunset_hours + ':' + sunset_minutes.substr(-2)
 
 		$('.pronostico-hoy')
 			.html(`
