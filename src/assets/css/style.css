@@ -48,6 +48,13 @@ h2, h3 {
     width: 150px;
     display: block;
     margin: 15px auto 15px auto;
+    transform: scale(1);
+    transition: 2s;
+}
+
+.logo-index:hover, .logo-index:focus {
+    transform: scale(1.1);
+    transition: 2s;
 }
 
 .hr {
