@@ -49,12 +49,12 @@ h2, h3 {
     display: block;
     margin: 15px auto 15px auto;
     transform: scale(1);
-    transition: 2s;
+    transition: 1s;
 }
 
 .logo-index:hover, .logo-index:focus {
     transform: scale(1.1);
-    transition: 2s;
+    transition: 1s;
 }
 
 .hr {
