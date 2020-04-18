@@ -1,5 +1,7 @@
+/* Aplicación principal AngularJS */
 angular.module('climaApp', []);
 
+/* Subcomponente info clima - primera parte */
 angular.module("climaApp")
 	.component("pronosticoHoy", {
 		template: `<div class="pronostico-hoy">
@@ -8,6 +10,7 @@ angular.module("climaApp")
 					  <p>{{ $ctrl.temp }}°</p>
 					  <p>{{ $ctrl.descrip }}</p>	
 				   </div>`,
+		/* Bindeo de las variables por valor o referencia */
 		bindings: { 
   			descrip: '@',
   			icon: '@',
@@ -16,6 +19,7 @@ angular.module("climaApp")
 		}
 	});
 
+/* Subcomponente info clima - segunda parte */
 angular.module("climaApp")
 	.component("pronosticoInfo", {
 		template: `<div class="pronostico-info">
@@ -39,6 +43,7 @@ angular.module("climaApp")
 						<p><strong>Visibilidad: </strong>{{ $ctrl.vis }} m.</p>
 						<p><strong>Presión: </strong>{{ $ctrl.press }} mbar.</p>
 				   </div>`,
+		/* Bindeo de las variables por valor o referencia */
 		bindings: { 
 			min: 		'@',
 			max: 		'@',
@@ -52,9 +57,11 @@ angular.module("climaApp")
 		}
 	});
 
+/* Controlador de la aplicación */
 angular.module('climaApp')
 	.controller('climaCtrl', function($scope, $http, $timeout) {
 		
+		/* Atributos con sus valores por defecto */
 	  	$scope.descrip 	= "....."
 		$scope.icon 	= "public/images/icons/clima_default.png"
 		$scope.temp 	= "--"
@@ -71,19 +78,24 @@ angular.module('climaApp')
 		$scope.error 	= ''
 		$scope.errorAdd = ''
 
+		/* Seteo fecha de hoy */
 		var meses	 	= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
 		var f 			= new Date()
 		$scope.fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 
+		/* Array de ciudades predefinidas */
 		var cities 		= [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, 
 			{"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, 
 			{"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
 
 		$scope.ciudades = []
+
+		/* Al iniciar la app, se carga la tabla con la info de las ciudades */
 		angular.forEach(cities, function(value) {
 			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + value.name + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
+				/* Agregamos ciudad al array para renderizarla a la app con el componente */
       			$scope.ciudades.push({
 		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
@@ -96,12 +108,13 @@ angular.module('climaApp')
       		})
 		});
 
-
+		/* Función para buscar el pronostico de una ciudad */
 		$scope.pronosticoCiudad = function() {
 
 			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + $scope.buscarCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
+				/* Seteo de los atributos con la info de la API */
 			    $scope.descrip 	= getDescription(response.data.weather[0].icon)
 				$scope.icon 	= 'public/images/icons/' + response.data.weather[0].icon + '.svg'
 				$scope.temp 	= Math.round(response.data.main.temp)
@@ -114,6 +127,7 @@ angular.module('climaApp')
 				$scope.wind 	= response.data.wind.speed
 				$scope.city 	= response.data.name
 
+				/* Variables aux para la hora del Amanecer y Atardecer */
 				var sunrise 		= new Date(response.data.sys.sunrise * 1000)
 				var sunrise_hours 	= sunrise.getHours()
 				var sunrise_minutes = "0" + sunrise.getMinutes()
@@ -126,6 +140,7 @@ angular.module('climaApp')
 
 			}, function(response){
 
+				/* En caso de error, reiniciamos los atributos a sus valores por defecto */
 				$scope.error 	= "Ciudad no encontrada"
 				$scope.descrip 	= "....."
 				$scope.icon 	= "public/images/icons/clima_default.png"
@@ -145,12 +160,14 @@ angular.module('climaApp')
 			});
 		}
 
+		/* Función para agregar ciudad a la tabla */
 		$scope.addCiudad = ""
 		$scope.addCity = function(event) {
 
 			$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + $scope.addCiudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94').
 		        then(function(response){
 
+					/* Agregamos ciudad al array para que se renderice el componente */
 		        	$scope.ciudades.push({
 			  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 			  			temp: Math.round(response.data.main.temp),
@@ -171,6 +188,7 @@ angular.module('climaApp')
 
 		}
 
+		/* Función para borrar una ciudad de la tabla */
 		$scope.removeCity = function(event, key) {
 			angular.forEach($scope.ciudades, function(value, index) {
 				if(value.id == key) {
@@ -181,6 +199,7 @@ angular.module('climaApp')
 
 	}); //END Controller
 
+	/* Función para obtener una descripción del clima */
 	function getDescription(icon) {
 		switch(icon) {
 			case '01d': case '01n': {

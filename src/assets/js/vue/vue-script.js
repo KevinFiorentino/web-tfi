@@ -1,3 +1,4 @@
+/* Subcomponente con la info del clima - primera parte */
 Vue.component('pronostico-hoy', {
 	props: ['descrip', 'icon', 'temp', 'city', 'id'],
 	template: `<div class="pronostico-hoy">
@@ -8,6 +9,7 @@ Vue.component('pronostico-hoy', {
 			  </div>`
 })
 
+/* Subcomponente con la info del clima - segunda parte */
 Vue.component('pronostico-info', {
 	props: ['temp_min', 'temp_max', 'press', 'hum', 'vis', 'wind', 'sunrise', 'sunset', 'id', 'fecha'],
 	template: `<div class="pronostico-info">
@@ -33,9 +35,11 @@ Vue.component('pronostico-info', {
 			  </div>`
 })
 
-
+/* Instanciamos app principal de Vue */
 var kevin = new Vue({
-  	el: '#clima',
+	/* ID donde se renderizan los componentes */
+	  el: '#clima',
+	/* Seteo por defecto de los valores de los atributos */
   	data: {
   		buscar_ciudad: 	'',
   		add_ciudad: 	'',
@@ -63,16 +67,20 @@ var kevin = new Vue({
   	},
 
   	created: function () {
+
+		/* Seteo fecha de hoy */
 		var meses 					= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
 		var f 						= new Date()
 		this.pronostico[0].fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 
+		/* Array ciudades predefinidas para cargar la tabla */
 		var cities = new Array ("Bogota", "Buenos Aires", "Hong Kong", "Nueva York", "Madrid", "Mosku", "Paris", "Roma", "Sidney", "Viena")
 
 		cities.forEach((value) => {
 	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + value + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
+				/* Con cada ciudad, se guarda en el array la info del clima */
       			this.ciudades.push({
 		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
@@ -88,11 +96,13 @@ var kevin = new Vue({
   	},
 
 	methods: {
+		/* COnsulta del pronostico de una ciudad */
 		pronostico_ciudad: function (event) {
 
 	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + this.buscar_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
+				/* Seteo de los atributos con la info de la API */
 		        this.pronostico[0].descrip 	= this.getDescription(response.data.weather[0].icon)
 				this.pronostico[0].icon 	= 'public/images/icons/' + response.data.weather[0].icon + '.svg'
 				this.pronostico[0].temp 	= Math.round(response.data.main.temp)
@@ -105,6 +115,7 @@ var kevin = new Vue({
 				this.pronostico[0].id 		= response.data.id
 				this.pronostico[0].city 	= response.data.name
 
+				/* Variables aux para la hora del Amanecer y Atardecer */
 				var sunrise 				= new Date(response.data.sys.sunrise * 1000)
 				var sunrise_hours 			= sunrise.getHours()
 				var sunrise_minutes 		= "0" + sunrise.getMinutes()
@@ -117,6 +128,7 @@ var kevin = new Vue({
 	        
       		}, response => {
 
+				/* En caso de error, retornan los valores por defecto de los atributos */
       			this.error = "Ciudad no encontrada"
       			this.pronostico[0].descrip 	= '.....'
 				this.pronostico[0].icon 	= 'public/images/icons/clima_default.png'
@@ -137,6 +149,7 @@ var kevin = new Vue({
       		});
 		},
 
+		/* Función para obtener una descripción del clima */
 		getDescription: function (icon) {
 			switch(icon) {
 				case '01d': case '01n': {
@@ -169,11 +182,13 @@ var kevin = new Vue({
 			}
 		},
 
+		/* Función para agregar ciudad a la tabla */
 		addCity: function (event) {
 
 	    	this.$http.get('https://api.openweathermap.org/data/2.5/weather?q=' + this.add_ciudad + '&units=metric&appid=f3f376b99fe63334a561bad62acb4f94')
 	      		.then(response => {
 
+				/* Agregamos ciudad al array para que se renderice con el template */
       			this.ciudades.push( {
 		  			icon: 'public/images/icons/' + response.data.weather[0].icon + '.svg',
 		  			temp: Math.round(response.data.main.temp),
@@ -193,6 +208,7 @@ var kevin = new Vue({
       		});
 		},
 		
+		/* Función para borrar ciudad de la tabla */
 		removeCity: function (event, key) {
 			this.ciudades.forEach((value, index) => {
 				if(value.id == key) {

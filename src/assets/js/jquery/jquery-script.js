@@ -1,9 +1,11 @@
+/* Seteo fecha de hoy */
 var meses 	= new Array ("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
 var f 		= new Date()
 var fecha 	= f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear()
 
 $('.pronostico-info p').first().html(fecha)
 
+/* Función para buscar el pronostico de una ciudad */
 $('#buscarCiudad').click(function(){
 
 	var buscar = $("input[type=text][name=buscar]").val()
@@ -11,6 +13,7 @@ $('#buscarCiudad').click(function(){
 	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + buscar + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
+		/* Variables aux para la hora del Amanecer y Atardecer */
 		var sunrise 			= new Date(response.sys.sunrise * 1000)
 		var sunrise_hours 		= sunrise.getHours()
 		var sunrise_minutes 	= "0" + sunrise.getMinutes()
@@ -21,6 +24,7 @@ $('#buscarCiudad').click(function(){
 		var sunset_minutes 		= "0" + sunset.getMinutes()
 		sunset 					= sunset_hours + ':' + sunset_minutes.substr(-2)
 
+		/* Cambio del HTML de la info del clima - primera parte */
 		$('.pronostico-hoy')
 			.html(`
 				<p>` + response.name + `</p>
@@ -29,6 +33,7 @@ $('#buscarCiudad').click(function(){
 				<p>` + getDescription(response.weather[0].icon) + `</p>
 			`)
 
+		/* Cambio del HTML de la info del clima - segunda parte */
 		$('.pronostico-info')
 			.html(`
 				<p>` + fecha + `</p>
@@ -56,6 +61,7 @@ $('#buscarCiudad').click(function(){
 
 		$('.error-ciudad').first().html('<p>Ciudad no encontrada</p>')
 
+		/* En caso de error, volvemos a cambiar el contenido del HTML con los valores por defecto */
 		$('.pronostico-hoy')
 			.html(`
 				<p>---</p>
@@ -94,6 +100,7 @@ $('#buscarCiudad').click(function(){
 	});
 })
 
+/* Función para obtener una descripción del clima */
 function getDescription(icon) {
 	switch(icon) {
 		case '01d': case '01n': {
@@ -126,13 +133,15 @@ function getDescription(icon) {
 	}
 }
 
-
+/* Array de ciudades predefinidas */
 var cities = [{"name": "Bogota"}, {"name": "Buenos Aires"}, {"name": "Hong Kong"}, {"name": "Nueva York"}, {"name": "Madrid"}, {"name": "Mosku"}, {"name": "Paris"}, {"name": "Roma"}, {"name": "Sidney"}, {"name": "Viena"}]
 
+/* Cargamos la tabla al iniciar la app */
 $.each(cities, function(index, value){
 	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + value.name + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
+		/* Con cada iteración, concatenamos el HTML de cada fila de la tabla */
 		$('#tablaCiudades').append(`
 					    <tr id="` + response.id + `">
 					      <th scope="row">` + response.name + `</th>
@@ -152,10 +161,12 @@ $.each(cities, function(index, value){
 	})
 });
 
+/* Función para borrar una ciudad de la tabla */
 function removeCity(id) {
 	$('#' + id).remove();
 }
 
+/* Función para agregar una ciudad a la tabla */
 function addCity() {
 
 	var addCiudad = $("input[type=text][name=addCiudad]").val()
@@ -163,6 +174,7 @@ function addCity() {
 	$.get("https://api.openweathermap.org/data/2.5/weather?q=" + addCiudad + "&units=metric&appid=f3f376b99fe63334a561bad62acb4f94", 
 		function(response, status){
 
+		/* Concatenamos el HTML de cada fila de la tabla con la info de la API */
 		$('#tablaCiudades').append(`
 					    <tr id="` + response.id + `">
 					      <th scope="row">` + response.name + `</th>
